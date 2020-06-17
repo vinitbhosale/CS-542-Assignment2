@@ -1,5 +1,8 @@
 package channelpopularity.driver;
 
+import channelpopularity.util.FileProcessor;
+import channelpopularity.processor.InputDataProcessor;
+
 /**
  * @author John Doe
  *
@@ -19,5 +22,13 @@ public class Driver {
 			System.exit(0);
 		}
 		System.out.println("Hello World! Lets get started with the assignment");
+
+		FileProcessor fp = new FileProcessor(args[0]);
+
+		InputDataProcessor iDp = new InputDataProcessor(fp);
+
+		iDp.process();
+
+
 	}
 }
