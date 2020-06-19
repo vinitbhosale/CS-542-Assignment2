@@ -2,18 +2,18 @@ package channelpopularity.state;
 
 public enum StateName {
 
-    UNPOPULAR(new UnpopularState()),
-    MILDLY_POPULAR(new MidlyPopulareState()),
-    HIGHLY_POPULAR(new HighlyPopularState()),
-    ULTRA_POPULAR(new UltraPopularState());
+    UNPOPULAR("UNPOPULAR"),
+    MILDLY_POPULAR("MILDLY_POPULAR"),
+    HIGHLY_POPULAR("HIGHLY_POPULAR"),
+    ULTRA_POPULAR("ULTRA_POPULAR");
 
-    private final StateI stateNameStrVale;
+    private final String stateNameStrVale;
 
-    StateName(StateI stateNameStrVale){
+    StateName(String stateNameStrVale){
         this.stateNameStrVale = stateNameStrVale;
     }
 
-    public StateI getStateNameValue(){
+    public String getStateNameValue(){
         return this.stateNameStrVale;
     }
 }

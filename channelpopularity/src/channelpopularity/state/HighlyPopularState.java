@@ -1,6 +1,15 @@
 package channelpopularity.state;
 
-public class HighlyPopularState implements StateI{
+import channelpopularity.context.ContextI;
+
+public class HighlyPopularState implements StateI {
+
+    private ContextI channelCntxt;
+
+    public HighlyPopularState(ContextI context){
+        channelCntxt = context;
+
+    }
 
     @Override
     public void addVideo() {

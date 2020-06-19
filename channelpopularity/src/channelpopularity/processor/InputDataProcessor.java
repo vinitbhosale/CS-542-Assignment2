@@ -1,34 +1,27 @@
 package channelpopularity.processor;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
-import channelpopularity.state.factory.SimpleStateFactoryI;
 import channelpopularity.util.FileProcessor;
-import channelpopularity.context.ContextI;
-import channelpopularity.state.StateName;
+import channelpopularity.state.StateI;
 
 public class InputDataProcessor {
 
     private FileProcessor fp;
     private String strData;
-    private ContextI channelCntxt;
+    private StateI channelCntxt;
 
-    public InputDataProcessor(FileProcessor inFp, ContextI inContext) {
+    public InputDataProcessor(FileProcessor inFp, StateI inChannelCntxt) {
 
         fp = inFp;
-        channelCntxt = inContext;
+        channelCntxt = inChannelCntxt;
     }
 
     public void process() throws IOException {
 
         while((strData = fp.poll()) != null){
 
-            //System.out.println(strData);
-
             String[] keyAndValue = strData.split("::");
-            //System.out.println(keyAndValue[0]+" || "+keyAndValue[1]);
+            System.out.println(keyAndValue[0]+" || "+keyAndValue[1]);
 
         }
    
