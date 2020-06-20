@@ -1,5 +1,7 @@
 package channelpopularity.state;
 
+import java.util.Map;
+
 import channelpopularity.context.ContextI;
 
 public class UnpopularState implements StateI{
@@ -11,25 +13,25 @@ public class UnpopularState implements StateI{
 
     }
     @Override
-    public void addVideo() {
+    public void addVideo(String inAddFile) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void averagePopularityScore() {
+    public void averagePopularityScore(String inFile, Map<String, Integer> inMetricCal) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void adRequest() {
+    public void adRequest(Map<String, Integer> inAdLength) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void removeVideo() {
+    public void removeVideo(String inRemoveFile) {
         // TODO Auto-generated method stub
 
     }

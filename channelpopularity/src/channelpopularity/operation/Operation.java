@@ -7,7 +7,7 @@ public enum Operation {
     AD_REQUEST("AD_REQUEST"),
     REMOVE_VIDEO("REMOVE_VIDEO");
 
-    private String operationStrval;
+    private final String operationStrval;
 
     Operation(String operationStrval){
         this.operationStrval = operationStrval; 

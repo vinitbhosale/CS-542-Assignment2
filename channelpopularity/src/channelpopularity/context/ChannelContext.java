@@ -13,6 +13,7 @@ public class ChannelContext implements ContextI, StateI {
     private StateI curState;
     private Map<StateName, StateI> availableStates;
 
+
     public ChannelContext(SimpleStateFactoryI stateFactoryIn, List<StateName> stateNames) {
         // initialize states using factory instance and the provided state names.
         // initialize current state.
@@ -34,23 +35,23 @@ public class ChannelContext implements ContextI, StateI {
     }
 
     @Override
-    public void addVideo() {
-        curState.addVideo();
+    public void addVideo(String inAddFile) {
+        curState.addVideo(inAddFile);
     }
 
     @Override
-    public void averagePopularityScore() {
-        curState.averagePopularityScore();
+    public void averagePopularityScore(String inFile, Map<String, Integer> inMetricCal) {
+        curState.averagePopularityScore(inFile, inMetricCal);
     }
 
     @Override
-    public void adRequest() {
-        curState.adRequest();
+    public void adRequest(Map<String, Integer> inAdLength) {
+        curState.adRequest(inAdLength);
     }
 
     @Override
-    public void removeVideo() {
-        curState.removeVideo();
+    public void removeVideo(String inRemoveFile) {
+        curState.removeVideo(inRemoveFile);
     }
 
 }
