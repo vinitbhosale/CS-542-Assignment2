@@ -64,7 +64,7 @@ public class InputDataProcessor {
                     channelCntxt.averagePopularityScore(file, metricCal);
                     break;
                 case AD_REQUEST:
-                    channelCntxt.adRequest(adLength);
+                    channelCntxt.adRequest(file, adLength);
                     break;
                 case REMOVE_VIDEO:
                     channelCntxt.removeVideo(file);

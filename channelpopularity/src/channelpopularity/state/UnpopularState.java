@@ -1,20 +1,27 @@
 package channelpopularity.state;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import channelpopularity.context.ContextI;
 
-public class UnpopularState implements StateI{
+public class UnpopularState implements StateI {
 
     private ContextI channelCntxt;
 
-    public UnpopularState(ContextI context){
+    public UnpopularState(ContextI context) {
         channelCntxt = context;
 
     }
+
     @Override
     public void addVideo(String inAddFile) {
-        // TODO Auto-generated method stub
+        if (channelCntxt.getVideoDataMap().containsKey(inAddFile)) {
+            //throws new exception.
+        }
+        else{
+            channelCntxt.setVideoDataMap(inAddFile, new HashMap<String, Integer>());
+        }
 
     }
 
@@ -25,7 +32,7 @@ public class UnpopularState implements StateI{
     }
 
     @Override
-    public void adRequest(Map<String, Integer> inAdLength) {
+    public void adRequest(String inAdFile, Map<String, Integer> inAdLength) {
         // TODO Auto-generated method stub
 
     }
@@ -35,5 +42,5 @@ public class UnpopularState implements StateI{
         // TODO Auto-generated method stub
 
     }
-    
+
 }

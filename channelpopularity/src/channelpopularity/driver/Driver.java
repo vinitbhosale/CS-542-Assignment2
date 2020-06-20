@@ -5,7 +5,6 @@ import channelpopularity.util.FileProcessor;
 import java.util.Arrays;
 
 import channelpopularity.context.ChannelContext;
-import channelpopularity.context.ContextI;
 import channelpopularity.processor.InputDataProcessor;
 import channelpopularity.state.StateI;
 import channelpopularity.state.StateName;

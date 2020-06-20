@@ -12,12 +12,13 @@ public class ChannelContext implements ContextI, StateI {
 
     private StateI curState;
     private Map<StateName, StateI> availableStates;
-
+    private Map<String, Map<String, Integer>> videoList;
 
     public ChannelContext(SimpleStateFactoryI stateFactoryIn, List<StateName> stateNames) {
         // initialize states using factory instance and the provided state names.
         // initialize current state.
         availableStates = new HashMap<StateName, StateI>();
+        videoList = new HashMap<String, Map<String, Integer>>();
         for (StateName state : stateNames) {
             availableStates.put(state, stateFactoryIn.create(state, this));
         }
@@ -35,6 +36,18 @@ public class ChannelContext implements ContextI, StateI {
     }
 
     @Override
+    public void setVideoDataMap(String addFile, Map<String, Integer> metricHMap) {
+        videoList.put(addFile, metricHMap);
+
+    }
+
+    @Override
+    public Map<String, Map<String, Integer>> getVideoDataMap() {
+
+        return videoList;
+    }
+
+    @Override
     public void addVideo(String inAddFile) {
         curState.addVideo(inAddFile);
     }
@@ -45,8 +58,8 @@ public class ChannelContext implements ContextI, StateI {
     }
 
     @Override
-    public void adRequest(Map<String, Integer> inAdLength) {
-        curState.adRequest(inAdLength);
+    public void adRequest(String inAdFile, Map<String, Integer> inAdLength) {
+        curState.adRequest(inAdFile, inAdLength);
     }
 
     @Override

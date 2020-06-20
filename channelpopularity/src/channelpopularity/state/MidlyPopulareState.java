@@ -1,5 +1,6 @@
 package channelpopularity.state;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import channelpopularity.context.ContextI;
@@ -8,14 +9,18 @@ public class MidlyPopulareState implements StateI {
 
     private ContextI channelCntxt;
 
-    public MidlyPopulareState(ContextI context){
+    public MidlyPopulareState(ContextI context) {
         channelCntxt = context;
 
     }
 
     @Override
     public void addVideo(String inAddFile) {
-        // TODO Auto-generated method stub
+        if (channelCntxt.getVideoDataMap().containsKey(inAddFile)) {
+            // throws new exception.
+        } else {
+            channelCntxt.setVideoDataMap(inAddFile, new HashMap<String, Integer>());
+        }
 
     }
 
@@ -26,7 +31,7 @@ public class MidlyPopulareState implements StateI {
     }
 
     @Override
-    public void adRequest(Map<String, Integer> inAdLength) {
+    public void adRequest(String inAdFile, Map<String, Integer> inAdLength) {
         // TODO Auto-generated method stub
 
     }
@@ -36,5 +41,5 @@ public class MidlyPopulareState implements StateI {
         // TODO Auto-generated method stub
 
     }
-    
+
 }
