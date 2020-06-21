@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import channelpopularity.util.FileProcessor;
+import channelpopularity.context.ContextI;
 import channelpopularity.operation.Operation;
 import channelpopularity.state.StateI;
 
@@ -12,9 +13,9 @@ public class InputDataProcessor {
 
     private FileProcessor fp;
     private String strData;
-    private StateI channelCntxt;
+    private ContextI channelCntxt;
 
-    public InputDataProcessor(FileProcessor inFp, StateI inChannelCntxt) {
+    public InputDataProcessor(FileProcessor inFp, ContextI inChannelCntxt) {
 
         fp = inFp;
         channelCntxt = inChannelCntxt;
@@ -46,6 +47,7 @@ public class InputDataProcessor {
                         String[] entry = pair.split("=");
                         metricCal.put(entry[0].trim(), Integer.parseInt(entry[1].trim()));
                     }
+                    //System.out.println(metricCal);
                 } else {
                     String[] ad = keyAndValue[1].split("=");
                     adLength.put(ad[0].trim(), Integer.parseInt(ad[1].trim()));

@@ -2,10 +2,13 @@ package channelpopularity.state;
 
 import java.util.Map;
 
+import channelpopularity.context.ContextI;
+
 public interface StateI {
-    public void addVideo(String inAddFile);
-    public void averagePopularityScore(String inFile, Map<String, Integer> inMetricCal);
-    public void adRequest(String inAdFile, Map<String, Integer> inAdLength);
-    public void removeVideo(String inRemoveFile);
+    public void addVideo(String inAddFile, ContextI channContextI);
+    public void averagePopularityScore(String inFile, Map<String, Integer> inMetricCal, ContextI channContextI);
+    public void adRequest(String inAdFile, Map<String, Integer> inAdLength, ContextI channContextI);
+    public void removeVideo(String inRemoveFile, ContextI channContextI);
+    
 
 }

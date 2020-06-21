@@ -5,7 +5,7 @@ import java.util.Map;
 
 import channelpopularity.context.ContextI;
 
-public class UltraPopularState implements StateI {
+public class UltraPopularState extends AbstractState {
 
     private ContextI channelCntxt;
 
@@ -15,30 +15,19 @@ public class UltraPopularState implements StateI {
     }
 
     @Override
-    public void addVideo(String inAddFile) {
-        if (channelCntxt.getVideoDataMap().containsKey(inAddFile)) {
+    public void adRequest(String inAdFile, Map<String, Integer> inAdLength, ContextI channelCntxt) {
+        if (!channelCntxt.getVideoDataMap().containsKey(inAdFile)) {
             // throws new exception.
         } else {
-            channelCntxt.setVideoDataMap(inAddFile, new HashMap<String, Integer>());
+            for (Map.Entry<String, Integer> entry : inAdLength.entrySet()) {
+                if (entry.getValue() > 1 && entry.getValue() <= 40) {
+                    System.out.println("ULTRA_POPULAR__AD_REQUEST::APPROVED");
+                } else {
+                    System.out.println("ULTRA_POPULAR__REQUEST::REJECTED");
+                }
+            }
+
         }
-
-    }
-
-    @Override
-    public void averagePopularityScore(String inFile, Map<String, Integer> inMetricCal) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void adRequest(String inAdFile, Map<String, Integer> inAdLength) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void removeVideo(String inRemoveFile) {
-        // TODO Auto-generated method stub
 
     }
 

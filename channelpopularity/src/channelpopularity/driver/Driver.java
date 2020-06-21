@@ -5,6 +5,7 @@ import channelpopularity.util.FileProcessor;
 import java.util.Arrays;
 
 import channelpopularity.context.ChannelContext;
+import channelpopularity.context.ContextI;
 import channelpopularity.processor.InputDataProcessor;
 import channelpopularity.state.StateI;
 import channelpopularity.state.StateName;
@@ -36,7 +37,7 @@ public class Driver {
 
 		SimpleStateFactoryI stateFacInf = new SimpleStateFactory();
 
-		StateI channelCntxt = new ChannelContext(stateFacInf, Arrays.asList(StateName.values()));
+		ContextI channelCntxt = new ChannelContext(stateFacInf, Arrays.asList(StateName.values()));
 
 		InputDataProcessor iDp = new InputDataProcessor(fp, channelCntxt);
 
