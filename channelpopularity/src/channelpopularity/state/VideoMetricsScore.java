@@ -33,8 +33,8 @@ public class VideoMetricsScore {
         return disLikes;
     }
 
-    public void setPopularityScore(double inPolpularityScore) {
-        popularityScore = inPolpularityScore;
+    public void setPopularityScore() {
+        popularityScore = (double) (views + (2 * (likes - disLikes)));
     }
 
     public Double getPopularityScore() {

@@ -1,13 +1,13 @@
 package channelpopularity.driver;
 
 import channelpopularity.util.FileProcessor;
+import channelpopularity.util.Results;
 
 import java.util.Arrays;
 
 import channelpopularity.context.ChannelContext;
 import channelpopularity.context.ContextI;
 import channelpopularity.processor.InputDataProcessor;
-import channelpopularity.state.StateI;
 import channelpopularity.state.StateName;
 import channelpopularity.state.factory.SimpleStateFactory;
 import channelpopularity.state.factory.SimpleStateFactoryI;
@@ -31,17 +31,23 @@ public class Driver {
 					REQUIRED_NUMBER_OF_CMDLINE_ARGS);
 			System.exit(0);
 		}
-		System.out.println("Hello World! Lets get started with the assignment");
+		
 
 		FileProcessor fp = new FileProcessor(args[0]);
 
 		SimpleStateFactoryI stateFacInf = new SimpleStateFactory();
 
-		ContextI channelCntxt = new ChannelContext(stateFacInf, Arrays.asList(StateName.values()));
+		Results result = new Results();
+
+		ContextI channelCntxt = new ChannelContext(stateFacInf, Arrays.asList(StateName.values()), result);
 
 		InputDataProcessor iDp = new InputDataProcessor(fp, channelCntxt);
 
 		iDp.process();
+
+		result.writeToStdout();
+
+		result.writeToFile(args[1]);
 
 	}
 }

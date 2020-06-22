@@ -11,21 +11,21 @@ import channelpopularity.state.UnpopularState;
 public class SimpleStateFactory implements SimpleStateFactoryI {
 
     @Override
-    public StateI create(StateName state, ContextI channelCntxt) {
+    public StateI create(StateName state){
 
         StateI stateObj = null;
         switch (state) {
             case UNPOPULAR:
-                stateObj = new UnpopularState(channelCntxt);
+                stateObj = new UnpopularState();
                 break;
             case MILDLY_POPULAR:
-                stateObj = new MidlyPopulareState(channelCntxt);
+                stateObj = new MidlyPopulareState();
                 break;
             case HIGHLY_POPULAR:
-                stateObj = new HighlyPopularState(channelCntxt);
+                stateObj = new HighlyPopularState();
                 break;
             case ULTRA_POPULAR:
-                stateObj = new UltraPopularState(channelCntxt);
+                stateObj = new UltraPopularState();
                 break;
 
             default:

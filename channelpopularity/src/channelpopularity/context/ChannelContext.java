@@ -8,6 +8,7 @@ import channelpopularity.state.StateI;
 import channelpopularity.state.StateName;
 import channelpopularity.state.VideoMetricsScore;
 import channelpopularity.state.factory.SimpleStateFactoryI;
+import channelpopularity.util.Results;
 
 public class ChannelContext implements ContextI {
 
@@ -15,15 +16,18 @@ public class ChannelContext implements ContextI {
     private Map<StateName, StateI> availableStates;
     private Map<String, VideoMetricsScore> videoList;
     private double channelPopularityScore;
+    private Results result;
 
-    public ChannelContext(SimpleStateFactoryI stateFactoryIn, List<StateName> stateNames) {
+    public ChannelContext(SimpleStateFactoryI stateFactoryIn, List<StateName> stateNames, Results inResult) {
         // initialize states using factory instance and the provided state names.
         // initialize current state.
         channelPopularityScore = 0.0;
         availableStates = new HashMap<StateName, StateI>();
         videoList = new HashMap<String, VideoMetricsScore>();
+        result = inResult;
+
         for (StateName state : stateNames) {
-            availableStates.put(state, stateFactoryIn.create(state, this));
+            availableStates.put(state, stateFactoryIn.create(state));
         }
 
         curState = availableStates.get(StateName.UNPOPULAR);
@@ -37,15 +41,16 @@ public class ChannelContext implements ContextI {
             curState = availableStates.get(nextState);
         }
     }
+
     public StateName getCurrentState() {
 
         for (Map.Entry<StateName, StateI> key : availableStates.entrySet()) {
-			if (key.getValue().equals(curState)) {
-				return key.getKey();
-			}
-		}
+            if (key.getValue().equals(curState)) {
+                return key.getKey();
+            }
+        }
         return null;
-    
+
     }
 
     @Override
@@ -69,23 +74,22 @@ public class ChannelContext implements ContextI {
 
     @Override
     public void addVideo(String inAddFile) {
-        curState.addVideo(inAddFile, this);
+        curState.addVideo(inAddFile, this, result);
     }
 
     @Override
     public void averagePopularityScore(String inFile, Map<String, Integer> inMetricCal) {
-        curState.calculateMetrics(inFile, inMetricCal, this);
+        curState.calculateMetrics(inFile, inMetricCal, this, result);
     }
 
     @Override
     public void adRequest(String inAdFile, Map<String, Integer> inAdLength) {
-        curState.adRequest(inAdFile, inAdLength, this);
+        curState.adRequest(inAdFile, inAdLength, this, result);
     }
 
     @Override
     public void removeVideo(String inRemoveFile) {
-        curState.removeVideo(inRemoveFile, this);
+        curState.removeVideo(inRemoveFile, this, result);
     }
-
 
 }

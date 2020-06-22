@@ -5,5 +5,5 @@ import channelpopularity.state.StateI;
 import channelpopularity.state.StateName;
 
 public interface SimpleStateFactoryI {
-    public StateI create(StateName state, ContextI channelCntxt);
+    public StateI create(StateName state);
 }

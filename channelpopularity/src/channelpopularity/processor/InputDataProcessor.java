@@ -7,7 +7,6 @@ import java.util.Map;
 import channelpopularity.util.FileProcessor;
 import channelpopularity.context.ContextI;
 import channelpopularity.operation.Operation;
-import channelpopularity.state.StateI;
 
 public class InputDataProcessor {
 
@@ -47,7 +46,7 @@ public class InputDataProcessor {
                         String[] entry = pair.split("=");
                         metricCal.put(entry[0].trim(), Integer.parseInt(entry[1].trim()));
                     }
-                    //System.out.println(metricCal);
+                    // System.out.println(metricCal);
                 } else {
                     String[] ad = keyAndValue[1].split("=");
                     adLength.put(ad[0].trim(), Integer.parseInt(ad[1].trim()));
