@@ -8,21 +8,24 @@ import channelpopularity.operation.Operation;
 public abstract class AbstractState implements StateI {
 
     public void addVideo(String inAddFile, ContextI channelCntxt) {
+        System.out.println(channelCntxt.getCurrentState()+"__VIDEO_ADDED::"+inAddFile);
         if (channelCntxt.getVideoDataMap().containsKey(inAddFile)) {
             // throws new exception.
         } else {
             channelCntxt.setVideoDataMap(inAddFile, new VideoMetricsScore());
         }
-        //System.out.println(channelCntxt.getVideoDataMap().+"__VIDEO_ADDED::"+inAddFile);
+        
 
     }
 
-    public void averagePopularityScore(String inFile, Map<String, Integer> inMetricCal, ContextI channelCntxt) {
+    public void calculateMetrics(String inFile, Map<String, Integer> inMetricCal, ContextI channelCntxt) {
 
+        System.out.println(channelCntxt.getCurrentState()+"__POPULARITY_SCORE_UPDATED::"+channelCntxt.getChannelPopularityScore());
+    
         channelCntxt.getVideoDataMap().get(inFile).update(
                 inMetricCal.get(VideoProperties.VIEWS.getVideoPropertiesValue()),
-                inMetricCal.get(VideoProperties.DISLIKES.getVideoPropertiesValue()),
-                inMetricCal.get(VideoProperties.LIKES.getVideoPropertiesValue()));
+                inMetricCal.get(VideoProperties.LIKES.getVideoPropertiesValue()),
+                inMetricCal.get(VideoProperties.DISLIKES.getVideoPropertiesValue()));
 
         channelCntxt.getVideoDataMap().get(inFile)
                 .setPopularityScore(channelCntxt.getVideoDataMap().get(inFile).getViews()
@@ -31,7 +34,7 @@ public abstract class AbstractState implements StateI {
         
         channelCntxt.setVideoDataMap(inFile, channelCntxt.getVideoDataMap().get(inFile));
 
-    
+       
         Double avgPopularityScore = 0.0;
             for (Map.Entry<String, VideoMetricsScore> entry : channelCntxt.getVideoDataMap().entrySet()) {
                 avgPopularityScore += entry.getValue().getPopularityScore();
@@ -49,10 +52,14 @@ public abstract class AbstractState implements StateI {
                 channelCntxt.setCurrentState(StateName.ULTRA_POPULAR);
             }
 
+            
+
     }
 
 
     public void removeVideo(String inRemoveFile, ContextI channelCntxt) {
+
+        System.out.println(channelCntxt.getCurrentState()+"__VIDEO_REMOVED::"+inRemoveFile);
         Double avgPopularityScore = 0.0;
         if (!channelCntxt.getVideoDataMap().containsKey(inRemoveFile)) {
             // throws new exception.
@@ -74,6 +81,7 @@ public abstract class AbstractState implements StateI {
                 channelCntxt.setCurrentState(StateName.ULTRA_POPULAR);
             }
         }
+        
 
     }
     

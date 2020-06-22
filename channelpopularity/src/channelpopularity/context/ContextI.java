@@ -8,7 +8,7 @@ import channelpopularity.state.VideoMetricsScore;
 
 public interface ContextI {
     public void setCurrentState(StateName nextState);
-    public StateI getCurrentState();
+    public StateName getCurrentState();
     public void setVideoDataMap(String addFile, VideoMetricsScore videoMtricsScre);
     public Map<String, VideoMetricsScore> getVideoDataMap();
     public void setChannelPopularityScore(double channelPopularityScore);

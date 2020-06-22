@@ -20,18 +20,21 @@ public class VideoMetricsScore {
         likes += inLikes;
         disLikes += inDisLikes;
     }
-    public int getViews(){
+
+    public int getViews() {
         return views;
     }
-    public int getLikes(){
+
+    public int getLikes() {
         return likes;
     }
-    public int getDislikes(){
+
+    public int getDislikes() {
         return disLikes;
     }
 
-    public void setPopularityScore(double inPolpularityScore){
-        popularityScore = inPolpularityScore; 
+    public void setPopularityScore(double inPolpularityScore) {
+        popularityScore = inPolpularityScore;
     }
 
     public Double getPopularityScore() {

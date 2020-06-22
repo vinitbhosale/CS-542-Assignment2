@@ -37,9 +37,15 @@ public class ChannelContext implements ContextI {
             curState = availableStates.get(nextState);
         }
     }
-    public StateI getCurrentState() {
-        
-        return curState;
+    public StateName getCurrentState() {
+
+        for (Map.Entry<StateName, StateI> key : availableStates.entrySet()) {
+			if (key.getValue().equals(curState)) {
+				return key.getKey();
+			}
+		}
+        return null;
+    
     }
 
     @Override
@@ -68,7 +74,7 @@ public class ChannelContext implements ContextI {
 
     @Override
     public void averagePopularityScore(String inFile, Map<String, Integer> inMetricCal) {
-        curState.averagePopularityScore(inFile, inMetricCal, this);
+        curState.calculateMetrics(inFile, inMetricCal, this);
     }
 
     @Override
