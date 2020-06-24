@@ -35,16 +35,16 @@ Note: Arguments accept the absolute path of the files.
 ## Description:
 1. Assumption:
  - Format of input file should be as given format:
-   Adding a video to the channel. Input format: ADD_VIDEO::<video name>.
+   Adding a video to the channel. Input format: ADD_VIDEO::video name.
 
-   Removing a video from the channel. Input format: REMOVE_VIDEO::<video name>.
+   Removing a video from the channel. Input format: REMOVE_VIDEO::video name.
 
-   Views, Likes and Dislikes. Input format: METRICS__<video name>::[VIEWS=<delta in #views>,LIKES=<delta in #likes>,DISLIKES=<delta in #dislikes>].
+   Views, Likes and Dislikes. Input format: METRICS__video name::[VIEWS=#views,LIKES=#likes,DISLIKES=#dislikes].
    Views, Likes and Dislikes MUST be integers.
    There are no spaces before or after the comma character.
    Unlike likes and dislikes, the delta in the number of views cannot be negative.
 
-   Advertisement requests. Input format: AD_REQUEST__<video name>::LEN=<length>.
+   Advertisement requests. Input format: AD_REQUEST__video name::LEN=length.
  - Order of input arguments to run command is input.txt file, output.txt file path.
 
 2. Data Structures:
