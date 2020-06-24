@@ -7,8 +7,18 @@ import channelpopularity.state.StateName;
 import channelpopularity.state.UltraPopularState;
 import channelpopularity.state.UnpopularState;
 
+/**
+ * SimpleStateFactory class creates object of each States.
+ */
 public class SimpleStateFactory implements SimpleStateFactoryI {
-
+    
+    /** 
+     * Implements object creation of each State based on the
+     * state parameter.
+     * 
+     * @param StateName state - State enum.
+     * @return stateObj - Object of State.
+    */
     @Override
     public StateI create(StateName state) {
 
@@ -34,5 +44,12 @@ public class SimpleStateFactory implements SimpleStateFactoryI {
 
         return stateObj;
     }
+
+    @Override
+    public String toString(){
+        return "Class: SimpleStateFactory, Data members:[]";
+    }
+
+    
 
 }

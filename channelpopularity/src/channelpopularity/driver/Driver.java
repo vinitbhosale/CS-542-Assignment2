@@ -23,7 +23,8 @@ import channelpopularity.userException.NegativeViewException;
 import channelpopularity.userException.NoVideoForAdException;
 
 /**
- * @author John Doe
+ * Driver class start point.
+ * @author Vinit Surendra Bhosale
  *
  */
 public class Driver {
@@ -46,26 +47,35 @@ public class Driver {
 
 			}
 
+			// FileProcessor object
 			FileProcessor fp = new FileProcessor(args[0]);
-
+			// SimpleStateFactoryI object
 			SimpleStateFactoryI stateFacInf = new SimpleStateFactory();
-
+			// Results object
 			Results result = new Results();
 
+			// ContextI object with SimpleStateFactoryI object, List of Statenames and Results object
+			// as parameter.
 			ContextI channelCntxt = new ChannelContext(stateFacInf, Arrays.asList(StateName.values()), result);
-
+			// InputDataProcessor object with FileProcessor object and ContextI object as parameter.
 			InputDataProcessor iDp = new InputDataProcessor(fp, channelCntxt);
 
+			// call of the process method in the InputDataprocessor.
 			iDp.process();
-
+			
+			/**
+			 * Displaying the final result store in Results on
+			 * StdOut and in output file.
+			 */
 			result.writeToStdout();
-
 			result.writeToFile(args[1]);
 
 		} catch (InvalidPathException | IOException | EmptyInputFileException | MissingInputFile | VideoAlreadyPresent
 				| VideoDoesNotExist | NegativeViewException | NoVideoForAdException | AdLengthException
 				| InvalidInputException e) {
 			System.err.println(e.getMessage());
+		}catch(NumberFormatException e){
+			System.err.println("Video properties values need to be Integer!");
 		}
 
 	}
