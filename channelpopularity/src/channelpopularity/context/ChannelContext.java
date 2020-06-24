@@ -8,6 +8,11 @@ import channelpopularity.state.StateI;
 import channelpopularity.state.StateName;
 import channelpopularity.state.VideoMetricsScore;
 import channelpopularity.state.factory.SimpleStateFactoryI;
+import channelpopularity.userException.AdLengthException;
+import channelpopularity.userException.NegativeViewException;
+import channelpopularity.userException.NoVideoForAdException;
+import channelpopularity.userException.VideoAlreadyPresent;
+import channelpopularity.userException.VideoDoesNotExist;
 import channelpopularity.util.Results;
 
 public class ChannelContext implements ContextI {
@@ -73,22 +78,23 @@ public class ChannelContext implements ContextI {
     }
 
     @Override
-    public void addVideo(String inAddFile) {
+    public void addVideo(String inAddFile) throws VideoAlreadyPresent {
         curState.addVideo(inAddFile, this, result);
     }
 
     @Override
-    public void averagePopularityScore(String inFile, Map<String, Integer> inMetricCal) {
+    public void averagePopularityScore(String inFile, Map<String, Integer> inMetricCal) throws NegativeViewException {
         curState.calculateMetrics(inFile, inMetricCal, this, result);
     }
 
     @Override
-    public void adRequest(String inAdFile, Map<String, Integer> inAdLength) {
+    public void adRequest(String inAdFile, Map<String, Integer> inAdLength)
+            throws NoVideoForAdException, AdLengthException {
         curState.adRequest(inAdFile, inAdLength, this, result);
     }
 
     @Override
-    public void removeVideo(String inRemoveFile) {
+    public void removeVideo(String inRemoveFile) throws VideoDoesNotExist {
         curState.removeVideo(inRemoveFile, this, result);
     }
 

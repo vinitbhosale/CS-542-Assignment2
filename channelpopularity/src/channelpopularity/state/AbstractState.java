@@ -3,16 +3,19 @@ package channelpopularity.state;
 import java.util.Map;
 
 import channelpopularity.context.ContextI;
+import channelpopularity.userException.VideoDoesNotExist;
+import channelpopularity.userException.NegativeViewException;
+import channelpopularity.userException.VideoAlreadyPresent;
 import channelpopularity.util.Results;
 
 public abstract class AbstractState implements StateI {
 
-    public void addVideo(String inAddFile, ContextI channelCntxt, Results result) {
-        result.storeResult(channelCntxt.getCurrentState() + "__VIDEO_ADDED::" + inAddFile);
+    public void addVideo(String inAddFile, ContextI channelCntxt, Results result) throws VideoAlreadyPresent {
 
         if (channelCntxt.getVideoDataMap().containsKey(inAddFile)) {
-            // throws new exception.
+            throw new VideoAlreadyPresent("Video is already present!");
         } else {
+            result.storeResult(channelCntxt.getCurrentState() + "__VIDEO_ADDED::" + inAddFile);
             channelCntxt.setVideoDataMap(inAddFile, new VideoMetricsScore());
         }
 
@@ -26,8 +29,8 @@ public abstract class AbstractState implements StateI {
 
     }
 
-    public void calculateMetrics(String inFile, Map<String, Integer> inMetricCal, ContextI channelCntxt,
-            Results result) {
+    public void calculateMetrics(String inFile, Map<String, Integer> inMetricCal, ContextI channelCntxt, Results result)
+            throws NegativeViewException {
 
         channelCntxt.getVideoDataMap().get(inFile).update(
                 inMetricCal.get(VideoProperties.VIEWS.getVideoPropertiesValue()),
@@ -49,13 +52,13 @@ public abstract class AbstractState implements StateI {
 
     }
 
-    public void removeVideo(String inRemoveFile, ContextI channelCntxt, Results result) {
+    public void removeVideo(String inRemoveFile, ContextI channelCntxt, Results result) throws VideoDoesNotExist {
 
-        result.storeResult(channelCntxt.getCurrentState() + "__VIDEO_REMOVED::" + inRemoveFile);
         Double avgPopularityScore = 0.0;
         if (!channelCntxt.getVideoDataMap().containsKey(inRemoveFile)) {
-            // throws new exception.
+            throw new VideoDoesNotExist("Video asked to remove does not exist!");
         } else {
+            result.storeResult(channelCntxt.getCurrentState() + "__VIDEO_REMOVED::" + inRemoveFile);
             channelCntxt.getVideoDataMap().remove(inRemoveFile);
 
             avgPopularityScore = avgCalulation(channelCntxt);
@@ -73,7 +76,10 @@ public abstract class AbstractState implements StateI {
         for (Map.Entry<String, VideoMetricsScore> entry : channelCntxt.getVideoDataMap().entrySet()) {
             avgPopularityScore += entry.getValue().getPopularityScore();
         }
-        return avgPopularityScore /= channelCntxt.getVideoDataMap().size();
+        if((avgPopularityScore /= channelCntxt.getVideoDataMap().size()) < 0){
+            avgPopularityScore = 0.0; 
+        }
+        return avgPopularityScore;
     }
 
     protected void stateChanger(double inAvgScore, ContextI channelCntxt) {

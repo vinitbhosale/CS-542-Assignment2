@@ -1,6 +1,5 @@
 package channelpopularity.state.factory;
 
-import channelpopularity.context.ContextI;
 import channelpopularity.state.HighlyPopularState;
 import channelpopularity.state.MidlyPopulareState;
 import channelpopularity.state.StateI;
@@ -11,7 +10,7 @@ import channelpopularity.state.UnpopularState;
 public class SimpleStateFactory implements SimpleStateFactoryI {
 
     @Override
-    public StateI create(StateName state){
+    public StateI create(StateName state) {
 
         StateI stateObj = null;
         switch (state) {
